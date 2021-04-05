@@ -1,0 +1,109 @@
+<div class="modal" id="myModal" *ngIf="submittedData">
+  <div class="modal-dialog">
+    <div class="modal-content">     
+      <div class="modal-header" class="text-center">
+        <button type="button" class="close"  (click)= "onClose()" >&times;</button>
+        <h4 class="modal-title" class="text-primary" >User Registration </h4>       
+      </div>     
+      <div class="modal-body">
+        <div  class="signup" >
+          <form [formGroup]="registrationForm"  (ngSubmit)="onSubmit()" >
+            <table class="table">
+              <thead></thead>
+              <tbody>
+                <tr>
+                  <td class="text-primary" >Username</td>
+                  <td>
+                    <div class="form-group">
+                      <input formControlName="userName"    type="text" class="form-control"  [ngClass]="{ 'is-invalid': submitted && f.userName.errors }" />  
+                      <div *ngIf="submitted && f.userName.errors" class="invalid-feedback">
+                        <div *ngIf="f.userName.errors.required">Username is required</div>
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td class="text-primary" >Contact </td>
+                  <td>
+                    <div class="form-group">
+                      <input formControlName="val" type="number"  class="form-control" [ngClass]="{ 'is-invalid': submitted && f.val.errors }" />
+                      <div *ngIf="submitted && f.val.errors" class="invalid-feedback">
+                        <div *ngIf="f.val.errors.required">Contact is required</div>
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td class="text-primary" >Password</td>
+                  <td>
+                    <div class="form-group">
+                      <input formControlName="password"  type="password"  class="form-control" [ngClass]="{ 'is-invalid': submitted && f.password.errors }" />      
+                      <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+                        <div *ngIf="f.password.errors.required">Password is required</div>
+                      </div>               
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td class="text-primary" >Retype Password</td>
+                  <td>
+                    <div class="form-group">
+                      <input formControlName="confirmPassword" type="password" class="form-control"  [ngClass]="{ 'is-invalid': submitted && f.confirmPassword.errors }" />
+                      <div *ngIf="submitted && f.confirmPassword.errors" class="invalid-feedback">
+                        <div *ngIf="f.confirmPassword.errors.required">Please Retype Password</div>
+                      </div>                
+                      <div *ngIf="f.confirmPassword.valid && f.confirmPassword.value != f.password.value" class="text-danger">   Not Matching </div>                
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td class="text-primary" >City</td>
+                  <td>
+                    <div class="form-group">
+                      <input formControlName="city" type="text"  class="form-control"  [ngClass]="{ 'is-invalid': submitted && f.city.errors }"  />
+                      <div *ngIf="submitted && f.city.errors" class="invalid-feedback">
+                        <div *ngIf="f.city.errors.required">City is required</div>
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td class="text-primary" >Country</td>
+                  <td>
+                    <div class="form-group">
+                      <input formControlName="country" type="text" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.country.errors }" />
+                      <div *ngIf="submitted && f.country.errors" class="invalid-feedback">
+                        <div *ngIf="f.country.errors.required">Country is required</div>
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td class="text-primary" >Code</td>
+                  <td>
+                    <div class="form-group">
+                      <input formControlName="code" type="text" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.code.errors }" />
+                      <div *ngIf="submitted && f.code.errors" class="invalid-feedback">
+                        <div *ngIf="f.code.errors.required">Code is required</div>
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td></td>
+                  <td> 
+                  <pre>  <button class="btn btn-success" type="submit">Submit</button>  <button class="btn btn-info" type="reset" (click)="onReset()">Reset</button>  <button type="button" class="btn btn-danger" data-dismiss="modal"  (click)= "onClose()"  >Close</button></pre>
+                  </td>
+                </tr>
+              </tbody>
+            </table>      
+          </form>
+        </div>       
+      </div>      
+    </div>
+  </div>
+</div>
+<button type="button" class="btn btn-primary"  data-target="#myModal" (click)= "onSubmitRegistration()" > Register </button>
+<div class="ShowData"  *ngIf="displayData">   
+  <app-view></app-view>
+</div>

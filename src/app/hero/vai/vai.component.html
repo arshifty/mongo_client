@@ -1,0 +1,124 @@
+<div align="center">
+
+  {{ registrationForm.value | json }} {{ eduForm.value |json }}
+
+  <form [formGroup]="registrationForm" (ngSubmit)="onSubmit()">
+    <table>
+      <tbody>
+        <tr>
+          <td class="text-primary">Username</td>
+          <td>
+            <div class="form-group">
+              <input formControlName="userName" type="text" class="form-control" />
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td class="text-primary">Contact </td>
+          <td>
+            <div class="form-group">
+              <input formControlName="val" type="number" class="form-control" />
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td class="text-primary">City</td>
+          <td>
+            <div class="form-group">
+              <input formControlName="city" type="text" class="form-control" />
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td class="text-primary">Country</td>
+          <td>
+            <div class="form-group">
+              <input formControlName="country" type="text" class="form-control" />
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td class="text-primary">Code</td>
+          <td>
+            <div class="form-group">
+              <input formControlName="code" type="text" class="form-control" />
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td></td>
+          <td><button type="button" class="btn btn-primary" data-target="#myModal" (click)="onSubmitRegistration()">
+              Add Educational Background </button></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div *ngIf="showModalData">
+      <table>
+        <tr>
+          <td>Class </td>
+          <td>{{eduForm.value.class}}</td>
+        </tr>
+        <tr>
+          <td>DOF</td>
+          <td>{{eduForm.value.dof}}</td>
+        </tr>
+      </table>
+    </div>
+
+    <br><br>
+
+    <button type="submit" class="btn-light"> final Submit</button>
+  </form>
+</div>
+
+
+
+
+
+
+<div class="modal" id="myModal" *ngIf="submittedData">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header" class="text-center">
+        <button type="button" class="close" (click)="onClose()">&times;</button>
+        <h4 class="modal-title" class="text-primary">Educational Background </h4>
+      </div>
+      <div class="modal-body">
+        <div class="signup">
+
+          <form [formGroup]="eduForm" (ngSubmit)="secondSubmit()">
+            <table>
+              <thead></thead>
+              <tbody>
+                <tr>
+                  <td class="text-primary">class</td>
+                  <td>
+                    <div class="form-group">
+                      <input formControlName="class" type="text" class="form-control" />
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td class="text-primary">dof </td>
+                  <td>
+                    <div class="form-group">
+                      <input formControlName="dof" type="text" class="form-control" />
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <pre>  <button class="btn btn-success" type="submit">Submit</button> </pre>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </form>
+
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
