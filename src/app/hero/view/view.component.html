@@ -1,8 +1,43 @@
- <div *ngIf="showUser" id="myModal" class="modal"> 
+<div class="container" class="sss">
+  <h4 class="text-primary">User List</h4>
+  <table class="table" >
+    <thead>
+      <tr>
+        <th>Id</th>
+        <th>Username</th>
+        <th>Contact</th>
+        <th>Password</th>
+        <th>City</th>
+        <th>Country</th>
+        <th>Code</th>
+        <th>Edit</th>
+        <th>Delete</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let val of userValue">
+        <td>{{ val._id }}</td>
+        <td>{{ val.userName }}</td>
+        <td>{{ val.contact }}</td>
+        <td>{{ val.password }}</td>
+        <td>{{ val.city }}</td>
+        <td>{{ val.country }}</td>
+        <td>{{ val.code }}</td>
+        <td> <button class="badge badge-info mr-2" type="button" data-target="#myModal" (click)="editUser(val._id)" class="some"  >Edit</button></td>
+        <td> <button class="badge badge-danger mr-2" (click)="deleteUser(val._id)">Delete</button></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+
+
+
+<div *ngIf="showUser" id="myModal" class="modal"> 
     <div class="modal-dialog">
       <div class="modal-content">     
         <div class="modal-header" class="text-center">          
-          <h4 class="modal-title" class="text-primary" >Update User </h4>       
+          <h4 class="modal-title" class="text-primary" >Update User</h4>       
         </div> 
         <div class="modal-body">
           <div  class="signup" >
@@ -101,34 +136,3 @@
     </div>
 </div>
 
-<div class="container">
-  <h4 class="text-primary">User List</h4>
-  <table class="table" >
-    <thead>
-      <tr>
-        <th>Id</th>
-        <th>Username</th>
-        <th>Contact</th>
-        <th>Password</th>
-        <th>City</th>
-        <th>Country</th>
-        <th>Code</th>
-        <th>Edit</th>
-        <th>Delete</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let val of userValue">
-        <td>{{ val._id }}</td>
-        <td>{{ val.userName }}</td>
-        <td>{{ val.contact }}</td>
-        <td>{{ val.password }}</td>
-        <td>{{ val.city }}</td>
-        <td>{{ val.country }}</td>
-        <td>{{ val.code }}</td>
-        <td> <button class="badge badge-info mr-2" type="button" data-target="#myModal" (click)="editUser(val._id)"> Edit</button></td>
-        <td> <button class="badge badge-danger mr-2" (click)="deleteUser(val._id)"> Delete</button></td>
-      </tr>
-    </tbody>
-  </table>
-</div>

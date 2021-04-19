@@ -14,6 +14,21 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { TooltipModule } from 'ngx-bootstrap/tooltip';
 import { SelectallComponent } from './hero/selectall/selectall.component';
 
+import { StoreModule } from '@ngrx/store';
+import { UserServiceService } from '../../src/app/service/user-service.service';
+import { EffectsModule } from '@ngrx/effects';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { ShowComponent } from './ashif/show/show.component';
+import { LoadingComponent } from './loading/loading.component';
+import {LoadingService} from './loading/loading.service';
+import { ShowCustomerComponent } from './ashif/show-customer/show-customer.component';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import { LoginComponent } from './login/login.component';
+import { ReactiveFormTestComponent } from './reactive-form-test/reactive-form-test.component';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {ToastrModule} from 'ngx-toastr';
+
+
 
 @NgModule({
   declarations: [
@@ -23,8 +38,17 @@ import { SelectallComponent } from './hero/selectall/selectall.component';
     HomeComponent,
     VaiComponent,
     SelectallComponent,
+    ShowComponent,
+    LoadingComponent,
+    ShowCustomerComponent,
+    LoginComponent,
+    ReactiveFormTestComponent,
+  
   ],
   imports: [
+    BrowserAnimationsModule,
+    ToastrModule.forRoot(),
+    MatProgressSpinnerModule,
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
@@ -33,9 +57,10 @@ import { SelectallComponent } from './hero/selectall/selectall.component';
     ModalModule,
     HttpClientModule,
     NgbModule,
-    TooltipModule
+    TooltipModule,
+    StoreModule.forRoot({}, {})
   ],
-  providers: [],
+  providers: [ LoadingService ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

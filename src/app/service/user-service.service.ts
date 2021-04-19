@@ -10,6 +10,9 @@ export class UserServiceService {
 
   constructor(private http: HttpClient) { }
 
+  userLOgin(data : any) {
+    return this.http.post(`${baseUrl}/ ............`, data);
+  }
 
   updateSelect(data: any) {
     console.log(data);

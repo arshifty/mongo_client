@@ -1,0 +1,6 @@
+<p>show-customer works!</p>
+
+
+<div *ngFor="let val of customerInfo$ | async">
+    {{val.name}} {{val.contact}} {{val.address}}
+</div>

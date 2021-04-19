@@ -5,8 +5,13 @@ import { ViewComponent } from './hero/view/view.component';
 import { HomeComponent } from './home/home.component';
 import { VaiComponent } from './hero/vai/vai.component';
 import { SelectallComponent } from './hero/selectall/selectall.component';
+import {ShowComponent} from '../app/ashif/show/show.component'
+import {ShowCustomerComponent} from '../app/ashif/show-customer/show-customer.component'
+import { LoginComponent } from './login/login.component';
+import { ReactiveFormTestComponent } from './reactive-form-test/reactive-form-test.component';
 
-const routes: Routes = [
+
+export const routes: Routes = [
   { 
     path: '', redirectTo: 'home', pathMatch: 'full' 
   },
@@ -29,7 +34,27 @@ const routes: Routes = [
   { 
     path: 'select', 
     component: SelectallComponent 
-  }
+  },
+  { 
+    path: 'go', 
+    component: ShowComponent 
+  },
+
+  { 
+    path: 'showCustomer', 
+    component: ShowCustomerComponent 
+  },
+  { 
+    path: 'login', 
+    component: LoginComponent 
+  },
+  { 
+    path: 'react', 
+    component: ReactiveFormTestComponent 
+  },
+
+
+
 ];
 
 @NgModule({

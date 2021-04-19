@@ -1,0 +1,51 @@
+<p>reactive-form-test works!</p>
+<button (click)="test()">click</button>
+
+<button (click)="setName()" class="set-button">Set</button>
+<p class="this-p-tag">{{personName}}</p>
+
+<button (click)="sendData()" class="send-button">Send</button>
+
+<button (click)="editPerson(101)" class="edit-button">Edit</button>
+
+<div>
+    <h3>Login</h3>
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+
+        <div>
+            <label>Enter Email :</label>
+            <input type="text" formControlName="email" placeholder="******@gmail.com">
+            <span
+                *ngIf="(loginForm.controls['email'].touched || submitted) &&  loginForm.controls['email'].errors?.required"
+                class="error text-danger">email is required.
+            </span>
+        </div>
+
+        <div>
+            <label>Enter Email :</label>
+            <input type="text" formControlName="password" placeholder="******">
+            <span
+                *ngIf="(loginForm.controls['password'].touched || submitted) &&  loginForm.controls['password'].errors?.required"
+                class="error text-danger">password is required.
+            </span>
+        </div>
+
+
+        <button class="theme-button-2" [disabled]="waiting" type="submit">Log In</button>
+
+    </form>
+    <button (click)="location.back()">Back</button>
+</div>
+
+
+<!--       
+<div>
+    <label>Enter Email :</label>
+    <input type="text" formControlName="email" placeholder="Email/Phone" required>
+</div>
+
+
+<div>
+    <label>Enter Password :</label>
+    <input type="password" formControlName="password" placeholder="Password" required>
+</div> -->
