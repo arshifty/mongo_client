@@ -2,7 +2,7 @@ import { async, ComponentFixture, fakeAsync, TestBed, TestComponentRenderer, tic
 import { ReactiveFormTestComponent } from './reactive-form-test.component';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { RouterTestingModule } from '@angular/router/testing';
-import { ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule , FormsModule} from '@angular/forms';
 import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
 
@@ -17,7 +17,8 @@ describe('ReactiveFormTestComponent', () => {
       imports: [
         HttpClientTestingModule,
         RouterTestingModule,
-        ReactiveFormsModule
+        ReactiveFormsModule,
+        FormsModule
 
       ],
       providers:
@@ -47,16 +48,7 @@ describe('ReactiveFormTestComponent', () => {
     expect(onClickMock).toHaveBeenCalled();
   });
 
-  it('should call onSubmit() method', () => {
-    let mock = spyOn(component, 'onSubmit');
-    let submitButton: DebugElement =
-      fixture.debugElement.query(By.css('button[type=submit]'));
-    fixture.detectChanges();
-    submitButton.triggerEventHandler('click', null);
-    fixture.detectChanges();
-    expect(mock).toHaveBeenCalledTimes(0);
-  });
-
+ 
 
   it('should click Set button', async(() => {
     fixture.detectChanges();
@@ -72,44 +64,86 @@ describe('ReactiveFormTestComponent', () => {
     });
   }));
 
-// using async
+  // using async
   it('should click Send button with async', async(() => {
     let buttonElement = fixture.debugElement.query(By.css('.send-button'));
-      
+
     spyOn(component, 'sendData');
     //Trigger click event after spyOn
     buttonElement.triggerEventHandler('click', null);
-  
+
     fixture.whenStable().then(() => {
       expect(component.sendData).toHaveBeenCalled();
     });
-  })); 
+  }));
 
-// using fake async 
+  // using fake async 
   it('should click Send button with fakeAsync', fakeAsync(() => {
     let buttonElement = fixture.debugElement.query(By.css('.send-button'));
-      
+
     spyOn(component, 'sendData');
     //Trigger click event after spyOn
     buttonElement.triggerEventHandler('click', null);
-      
+
     tick();
     expect(component.sendData).toHaveBeenCalled();
-  })); 
+  }));
 
   //edit button 
   it('should click Edit button', fakeAsync(() => {
     let buttonElement = fixture.debugElement.query(By.css('.edit-button'));
-    
+
     spyOn(component, 'editPerson');
     //Trigger click event after spyOn
     buttonElement.triggerEventHandler('click', null);
-    
+
     tick();
     expect(component.editPerson).toHaveBeenCalled();
-  }));  
+  }));
+
+   //reactive form start 
+
+   // onSubmit() works 
+   it('>> should call onSubmit() method', () => {
+    let mock = spyOn(component, 'onSubmit');
+    let submitButton: DebugElement =
+      fixture.debugElement.query(By.css('button[type=submit]'));
+    fixture.detectChanges();
+    submitButton.triggerEventHandler('click', null);
+    fixture.detectChanges();
+    expect(mock).toHaveBeenCalledTimes(0);
+  });
+
+  
+   
+  //form invalidity check
+  it('>> form invalid when empty', () => {
+    expect(component.loginForm.valid).toBeFalsy();
+  });
+
+  //email field validity 
+  it('>> email field validity', () => {
+    let email = component.loginForm.controls['email'];
+    expect(email.valid).toBeFalsy(); (2)
+  });
+
+  it('>> error handling with  email field validity', () => {
+    let errors = {};
+    let email = component.loginForm.controls['email'];
+    errors = email.errors || {};
+    expect(errors['required']).toBeTruthy();
+  });
+
+  //password field validity 
+  it('>> password field validity', () => {
+    let email = component.loginForm.controls['password'];
+    expect(email.valid).toBeFalsy(); (2)
+  });
 
 
+
+
+  //reactive form end
 
 });
 

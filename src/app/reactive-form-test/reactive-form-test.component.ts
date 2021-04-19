@@ -45,7 +45,6 @@ export class ReactiveFormTestComponent implements OnInit {
       this.submitted = false;
       console.log(this.loginForm.value);
 
-
       // ///button disable option based of waiting for data from api
       // this.waiting = true;
       // this._paymentService.requestBalance(data).subscribe((result: any) => {
