@@ -9,6 +9,8 @@ import {ShowComponent} from '../app/ashif/show/show.component'
 import {ShowCustomerComponent} from '../app/ashif/show-customer/show-customer.component'
 import { LoginComponent } from './login/login.component';
 import { ReactiveFormTestComponent } from './reactive-form-test/reactive-form-test.component';
+import { RouterLinkTestComponent } from './hero/router-link-test/router-link-test.component';
+import { StudentComponent } from './student/student.component';
 
 
 export const routes: Routes = [
@@ -52,8 +54,15 @@ export const routes: Routes = [
     path: 'react', 
     component: ReactiveFormTestComponent 
   },
+  { 
+    path: 'settings/ashif/edit/:id', 
+    component: RouterLinkTestComponent 
+  },
 
-
+  { 
+    path: 'student', 
+    component: StudentComponent 
+  },
 
 ];
 

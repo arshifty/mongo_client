@@ -37,5 +37,16 @@ export class LoginComponent implements OnInit {
         console.log(error);
       });;
   }
+ 
+  go(supporter_id) {
+   
+    // this.router.navigateByUrl('accounts/register-code/' + this.supporter_id);
+    this.router.navigateByUrl('display');
+  }
+
+  goto(supporter_id) {
+    this.router.navigateByUrl('display/'+supporter_id);
+  }
+
 
 }

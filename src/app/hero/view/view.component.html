@@ -1,4 +1,7 @@
 <div class="container" class="sss">
+  <a class="aaa" routerLink="/settings/ashif/edit/1">link</a> 
+ 
+ 
   <h4 class="text-primary">User List</h4>
   <table class="table" >
     <thead>
@@ -25,6 +28,7 @@
         <td>{{ val.code }}</td>
         <td> <button class="badge badge-info mr-2" type="button" data-target="#myModal" (click)="editUser(val._id)" class="some"  >Edit</button></td>
         <td> <button class="badge badge-danger mr-2" (click)="deleteUser(val._id)">Delete</button></td>
+        <!-- <td><a class="aaa" routerLink="/settings/ashif/edit/6050841368b2160b403598e8">link</a></td> -->
       </tr>
     </tbody>
   </table>

@@ -1,15 +1,15 @@
 import { HttpClientTestingModule } from '@angular/common/http/testing';
-import { ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
+import { ComponentFixture, fakeAsync, inject, TestBed, tick } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { RouterTestingModule } from '@angular/router/testing';
 import { DOMHelper } from '../testing/dom-helper';
 import { UserServiceService } from '../service/user-service.service';
 import { LoginComponent } from './login.component';
 import { of } from 'rxjs';
-// import { Router } from '@angular/router';
-// import { Component } from '@angular/core';
-// import { Location } from '@angular/common';
-// import { routes } from '../app-routing.module'
+import { Component } from '@angular/core';
+import { Location } from '@angular/common';
+import { routes } from '../app-routing.module'
+import { ActivatedRoute, convertToParamMap, Router } from '@angular/router';
 
 
 describe('LoginComponent', () => {
@@ -18,8 +18,8 @@ describe('LoginComponent', () => {
   let dh: DOMHelper<LoginComponent>;
   let userServicesMoc: any;
 
-  // let location: Location;
-  // let router: Router;
+  let location: Location;
+  let router: Router;
 
   beforeEach(async () => {
 
@@ -31,13 +31,21 @@ describe('LoginComponent', () => {
       imports: [
         HttpClientTestingModule,
         RouterTestingModule,
-       // RouterTestingModule.withRoutes(routes)
+        RouterTestingModule.withRoutes(routes)
 
       ],
       providers:
         [
           { provide: UserServiceService, useValue: userServicesMoc },
-          { provide: UserServiceService, useClass: UserServiceServiceStub }
+          { provide: UserServiceService, useClass: UserServiceServiceStub },
+
+          // {
+          //   provide: ActivatedRoute,
+          //   useValue: {
+          //     paramMap: of(convertToParamMap({ title: 'Asparagus' }))
+          //   }
+          // }
+
         ],
     })
       .compileComponents();
@@ -48,7 +56,47 @@ describe('LoginComponent', () => {
     component = fixture.componentInstance;
     fixture.detectChanges();
     dh = new DOMHelper(fixture);
+
+    router = TestBed.get(Router);
+    location = TestBed.get(Location);
+    router.initialNavigation();
+
   });
+
+  it('should call Router.navigateByUrl("display/:id") ', inject([Router], (router: Router) => {
+    const spy = spyOn(router, 'navigateByUrl');
+    component.goto(23);
+    const url = spy.calls.first().args[0];
+    expect(url).toBe('display/23');
+  }));
+
+
+
+  it('should test component with Activated Route', fakeAsync(() => {
+
+    fixture.detectChanges();
+    let liElement = fixture.debugElement.query(By.css('.list-group-item'));
+    liElement.nativeElement.click();
+    tick();
+    expect(location.path()).toContain('/display');
+    fixture.detectChanges();
+
+  }));
+
+
+  it('navigate to "" redirects you to /home', fakeAsync(() => {
+    router.navigate(['']);
+    tick();
+    expect(location.path()).toBe('/home');
+  }));
+
+  it('navigate to "/display" redirects you to /display', fakeAsync(() => {
+    router.navigate(['display']);
+    tick();
+    expect(location.path()).toBe('/display');
+  }));
+
+
 
   // it('navigate to "" redirects you to /home', fakeAsync(() => {
   //   router = TestBed.get(Router);
@@ -115,6 +163,10 @@ describe('LoginComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+
+
+
 });
 
 

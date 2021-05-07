@@ -10,10 +10,13 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrls: ['./view.component.css'],
 })
 export class ViewComponent implements OnInit {
-  userValue: any; 
+  userValue: any=[]; 
   userData: any;
   submitted = true;
   showUser: boolean;
+  
+
+ 
 
   constructor(private myservice: UserServiceService,    private route: ActivatedRoute,    private router: Router) { }
 
@@ -75,6 +78,10 @@ export class ViewComponent implements OnInit {
         data => {
           this.userValue = data;
           console.log(data);
+
+          this.userValue.forEach(element => {
+          });
+
         },
         error => {
           console.log(error);

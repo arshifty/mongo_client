@@ -2,7 +2,7 @@ import { async, ComponentFixture, fakeAsync, TestBed, TestComponentRenderer, tic
 import { ReactiveFormTestComponent } from './reactive-form-test.component';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { RouterTestingModule } from '@angular/router/testing';
-import { ReactiveFormsModule , FormsModule} from '@angular/forms';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
 
@@ -48,7 +48,7 @@ describe('ReactiveFormTestComponent', () => {
     expect(onClickMock).toHaveBeenCalled();
   });
 
- 
+
 
   it('should click Set button', async(() => {
     fixture.detectChanges();
@@ -101,10 +101,10 @@ describe('ReactiveFormTestComponent', () => {
     expect(component.editPerson).toHaveBeenCalled();
   }));
 
-   //reactive form start 
+  //reactive form start 
 
-   // onSubmit() works 
-   it('>> should call onSubmit() method', () => {
+  // onSubmit() works 
+  it('>> should call onSubmit() method', () => {
     let mock = spyOn(component, 'onSubmit');
     let submitButton: DebugElement =
       fixture.debugElement.query(By.css('button[type=submit]'));
@@ -114,8 +114,8 @@ describe('ReactiveFormTestComponent', () => {
     expect(mock).toHaveBeenCalledTimes(0);
   });
 
-  
-   
+
+
   //form invalidity check
   it('>> form invalid when empty', () => {
     expect(component.loginForm.valid).toBeFalsy();
@@ -124,7 +124,7 @@ describe('ReactiveFormTestComponent', () => {
   //email field validity 
   it('>> email field validity', () => {
     let email = component.loginForm.controls['email'];
-    expect(email.valid).toBeFalsy(); (2)
+    expect(email.valid).toBeFalsy();
   });
 
   it('>> error handling with  email field validity', () => {
@@ -144,6 +144,33 @@ describe('ReactiveFormTestComponent', () => {
 
 
   //reactive form end
+
+  it('submitting a form ', () => {
+
+    expect(component.loginForm.invalid).toBeTruthy();
+    let btn = fixture.debugElement.query(By.css('.theme-button-2'))
+    let native: HTMLElement = btn.nativeElement;
+    expect(native.innerHTML).toBe('Log In');
+
+    expect(btn.nativeElement.disabled).toBeTruthy();
+
+    component.loginForm.controls['email'].setValue('sadad');
+    component.loginForm.controls['password'].setValue('01521466521');
+
+    fixture.detectChanges();
+
+    expect(btn.nativeElement.disabled).toBeFalsy();
+
+    component.onSubmit();
+
+    fixture.detectChanges();
+    expect(component.loginForm.valid).toBeTruthy();
+
+
+
+  });
+
+
 
 });
 

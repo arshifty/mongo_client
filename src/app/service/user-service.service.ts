@@ -1,14 +1,20 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
+
 const baseUrl = 'http://localhost:3006/user';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserServiceService {
+   ROOT_URl = 'http://localhost:3006/user';
 
   constructor(private http: HttpClient) { }
+
+  getPosts(){
+    return this.http.get('https://jsonplaceholder.typicode.com/posts')
+  }
 
   userLOgin(data : any) {
     return this.http.post(`${baseUrl}/ ............`, data);

@@ -31,7 +31,8 @@
         </div>
 
 
-        <button class="theme-button-2" [disabled]="waiting" type="submit">Log In</button>
+        <!-- <button class="theme-button-2" [disabled]="waiting" type="submit">Log In</button> -->
+        <button class="theme-button-2" [disabled]="loginForm.invalid" type="submit">Log In</button>
 
     </form>
     <button (click)="location.back()">Back</button>
