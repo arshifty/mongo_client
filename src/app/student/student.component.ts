@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Observable } from 'rxjs';
+import { Stu } from '../model/stu';
+import { User } from '../model/User';
 import { StudentService } from '../service/student.service';
 
 
@@ -11,39 +14,31 @@ import { StudentService } from '../service/student.service';
 export class StudentComponent implements OnInit {
 
   stuData: any = [];
-  datas: any = [];
   users: any = [];
+  heroes: Observable<User[]>;
+  submitted: boolean;
+
   constructor(
     private myservice: StudentService,
     private route: ActivatedRoute,
-    private router: Router) { }
+    private router: Router) {  }
 
   ngOnInit(): void {
+    this.heroes = this.myservice.getHeroes();
+    
     this.displayHardCodedData();
     this.display();
-    // this.others();
   }
-
-  // others() {
-  //   this.myservice.getStuData().subscribe((data) => {
-  //     this.datas = data;
-  //     console.log(this.datas.length);
-  //   })
-  // }
 
   displayHardCodedData() {
     this.users = this.myservice.getUsers();
   }
 
-  array = [];  
-
   display() {
     this.myservice.getStuData().subscribe((data) => {
       this.stuData = data;
+      this.submitted = true;
     })
-
-    
-
   }
 
 }

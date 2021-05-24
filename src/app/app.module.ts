@@ -29,7 +29,10 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {ToastrModule} from 'ngx-toastr';
 import { RouterLinkTestComponent } from './hero/router-link-test/router-link-test.component';
 import { StudentComponent } from './student/student.component';
-
+import { SearchpaginationComponent } from './searchpagination/searchpagination.component';
+import { NgxPaginationModule } from 'ngx-pagination';
+import { Ng2OrderModule } from 'ng2-order-pipe';
+import { Ng2SearchPipeModule } from 'ng2-search-filter'
 
 
 @NgModule({
@@ -47,10 +50,13 @@ import { StudentComponent } from './student/student.component';
     ReactiveFormTestComponent,
     RouterLinkTestComponent,
     StudentComponent,
+    SearchpaginationComponent,
   
   ],
   imports: [
     BrowserAnimationsModule,
+    Ng2SearchPipeModule,
+    Ng2OrderModule,
     ToastrModule.forRoot(),
     MatProgressSpinnerModule,
     BrowserModule,
@@ -62,7 +68,8 @@ import { StudentComponent } from './student/student.component';
     HttpClientModule,
     NgbModule,
     TooltipModule,
-    StoreModule.forRoot({}, {})
+    StoreModule.forRoot({}, {}),
+    NgxPaginationModule
   ],
   providers: [ LoadingService ],
   bootstrap: [AppComponent]

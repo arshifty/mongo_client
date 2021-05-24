@@ -3,6 +3,10 @@
 
 module.exports = function (config) {
   config.set({
+    files: [
+      "node_modules/bootstrap/bootstrap.min.css",
+      "src/app/student/student.component.css"
+    ],
     basePath: '',
     frameworks: ['jasmine', '@angular-devkit/build-angular'],
     plugins: [

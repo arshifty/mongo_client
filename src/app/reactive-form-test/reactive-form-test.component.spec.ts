@@ -137,7 +137,7 @@ describe('ReactiveFormTestComponent', () => {
   //password field validity 
   it('>> password field validity', () => {
     let email = component.loginForm.controls['password'];
-    expect(email.valid).toBeFalsy(); (2)
+    expect(email.valid).toBeFalsy(); 
   });
 
 

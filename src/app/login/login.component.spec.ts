@@ -70,7 +70,12 @@ describe('LoginComponent', () => {
     expect(url).toBe('display/23');
   }));
 
-
+  it('should call hello method Router.navigateByUrl("vai/") ', inject([Router], (router: Router) => {
+    const spy = spyOn(router, 'navigateByUrl');
+    component.hello();
+    const url = spy.calls.first().args[0];
+    expect(url).toBe('vai');
+  }));
 
   it('should test component with Activated Route', fakeAsync(() => {
 
@@ -80,7 +85,6 @@ describe('LoginComponent', () => {
     tick();
     expect(location.path()).toContain('/display');
     fixture.detectChanges();
-
   }));
 
 
@@ -95,17 +99,6 @@ describe('LoginComponent', () => {
     tick();
     expect(location.path()).toBe('/display');
   }));
-
-
-
-  // it('navigate to "" redirects you to /home', fakeAsync(() => {
-  //   router = TestBed.get(Router);
-  //   location = TestBed.get(Location);
-  //   router.navigate(['']);
-  //   tick();
-  //   expect(location.path()).toBe('/home');
-  // }));
-
 
   it('should contain loginForm as FormGroup name', () => {
     expect(component.loginForm).not.toBeNull();

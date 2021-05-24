@@ -11,6 +11,7 @@ import { LoginComponent } from './login/login.component';
 import { ReactiveFormTestComponent } from './reactive-form-test/reactive-form-test.component';
 import { RouterLinkTestComponent } from './hero/router-link-test/router-link-test.component';
 import { StudentComponent } from './student/student.component';
+import { SearchpaginationComponent } from './searchpagination/searchpagination.component';
 
 
 export const routes: Routes = [
@@ -62,6 +63,12 @@ export const routes: Routes = [
   { 
     path: 'student', 
     component: StudentComponent 
+  },
+
+
+  { 
+    path: 'pagination', 
+    component: SearchpaginationComponent 
   },
 
 ];

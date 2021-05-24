@@ -1,34 +1,23 @@
 
-<!-- 
-<table>
-    <thead>
-      <tr>
-        <th>Id</th>
-        <th>Username</th>
-        <th>Contact</th>
-        <th>Password</th>
-        <th>City</th>
-        <th>Country</th>
-        <th>Code</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let val of stuData">
-        <td>{{ val._id }}</td>
-        <td>{{ val.userName }}</td>
-        <td>{{ val.contact }}</td>
-        <td>{{ val.password }}</td>
-        <td>{{ val.city }}</td>
-        <td>{{ val.country }}</td>
-        <td>{{ val.code }}</td>
-      </tr>
-    </tbody>
-  </table> -->
-
 <!-- <div *ngFor='let item of stuData; let i = index'>
     <p>{{i}} {{item.userName}} - {{item.contact}}</p>
 </div> -->
+
 <hr>
 <div *ngFor='let item of users; let i = index'>
-  <p> {{i}} {{item.name}} - {{item.surname}}</p>
+  <p class="user-list"> {{i}} {{item.name}} - {{item.surname}}</p>
 </div>
+
+<hr>
+
+<ul>
+  <li *ngFor="let hero of heroes | async ">
+   {{hero.userName}}  {{hero.password}}
+  </li>
+</ul>
+
+<div class="sky" style="background-color: rgb(180, 168, 192);">
+  <h1>hello , Sky </h1>
+</div>
+
+<div class="success-message" *ngIf="submitted">hello</div>

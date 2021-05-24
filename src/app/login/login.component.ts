@@ -38,10 +38,12 @@ export class LoginComponent implements OnInit {
       });;
   }
  
-  go(supporter_id) {
-   
-    // this.router.navigateByUrl('accounts/register-code/' + this.supporter_id);
-    this.router.navigateByUrl('display');
+  go() {
+       this.router.navigateByUrl('display');
+  }
+
+  hello() {
+    this.router.navigateByUrl('vai');
   }
 
   goto(supporter_id) {

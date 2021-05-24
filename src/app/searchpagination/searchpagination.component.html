@@ -1,0 +1,32 @@
+<p>searchpagination works!</p>
+
+<nav class="navbar">
+    <input type="text" name="userName" [(ngModel)]="userName" (ngModelChange)="search()" placeholder="Enter name">
+</nav>
+
+<table>
+    <thead>
+        <tr>
+
+            <th>Username</th>
+            <th>Contact</th>
+            <th>Password</th>
+            <th>City</th>
+            <th>Country</th>
+            <th>Code</th>
+
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let val of stuData | paginate:{ itemsPerPage:3 , currentPage:p }; ">
+
+            <td>{{ val.userName }}</td>
+            <td>{{ val.contact }}</td>
+            <td>{{ val.password }}</td>
+            <td>{{ val.city }}</td>
+            <td>{{ val.country }}</td>
+            <td>{{ val.code }}</td>
+        </tr>
+    </tbody>
+    <pagination-controls (pageChange)=" p = $event" ></pagination-controls>
+</table>
