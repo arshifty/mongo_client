@@ -15,9 +15,6 @@ import { TooltipModule } from 'ngx-bootstrap/tooltip';
 import { SelectallComponent } from './hero/selectall/selectall.component';
 
 import { StoreModule } from '@ngrx/store';
-import { UserServiceService } from '../../src/app/service/user-service.service';
-import { EffectsModule } from '@ngrx/effects';
-import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { ShowComponent } from './ashif/show/show.component';
 import { LoadingComponent } from './loading/loading.component';
 import {LoadingService} from './loading/loading.service';
@@ -32,7 +29,9 @@ import { StudentComponent } from './student/student.component';
 import { SearchpaginationComponent } from './searchpagination/searchpagination.component';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { Ng2OrderModule } from 'ng2-order-pipe';
-import { Ng2SearchPipeModule } from 'ng2-search-filter'
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { environment } from '../environments/environment'
 
 
 @NgModule({
@@ -69,7 +68,8 @@ import { Ng2SearchPipeModule } from 'ng2-search-filter'
     NgbModule,
     TooltipModule,
     StoreModule.forRoot({}, {}),
-    NgxPaginationModule
+    NgxPaginationModule,
+    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
   ],
   providers: [ LoadingService ],
   bootstrap: [AppComponent]

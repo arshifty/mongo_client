@@ -1,0 +1,7 @@
+{
+  "path": "src/app",
+  "ignore": [
+    ".mat-"
+  ],
+  "styleExt": ".css"
+}

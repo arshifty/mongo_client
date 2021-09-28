@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import {  FormControl,  FormGroup,  Validators,  FormBuilder,} from "@angular/forms";
+import { FormControl, FormGroup, Validators, FormBuilder, } from "@angular/forms";
 import { User } from '../../model/User';
 import { UserServiceService } from '../../service/user-service.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { SwUpdate } from '@angular/service-worker';
 
 @Component({
   selector: 'app-view',
@@ -10,24 +11,25 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrls: ['./view.component.css'],
 })
 export class ViewComponent implements OnInit {
-  userValue: any=[]; 
+  userValue: any = [];
   userData: any;
   submitted = true;
   showUser: boolean;
-  
 
- 
+  constructor(updates: SwUpdate, private myservice: UserServiceService, private route: ActivatedRoute, private router: Router) {
+    updates.available.subscribe(event => {
+      updates.activateUpdate().then(() => document.location.reload());
+    })
+  }
 
-  constructor(private myservice: UserServiceService,    private route: ActivatedRoute,    private router: Router) { }
-
-  ngOnInit(): void { 
+  ngOnInit(): void {
     this.viewData();
-   // this.editUser(this.route.snapshot.paramMap.get('id'));
-   }
+    // this.editUser(this.route.snapshot.paramMap.get('id'));
+  }
 
   registrationForm = new FormGroup({
     userName: new FormControl("", Validators.required),
-    val: new FormControl("", [ Validators.required, Validators.pattern(/^-?(0|[1-9]\d*)?$/), ]),
+    val: new FormControl("", [Validators.required, Validators.pattern(/^-?(0|[1-9]\d*)?$/),]),
     password: new FormControl("", Validators.required),
     confirmPassword: new FormControl("", Validators.required),
     city: new FormControl("", Validators.required),
@@ -36,32 +38,32 @@ export class ViewComponent implements OnInit {
   });
 
   get f() { return this.registrationForm.controls; }
-  
+
   onClose() {
-    this.showUser = false;    
+    this.showUser = false;
   }
 
-  updateUser()  {
-    if ( this.registrationForm.value["password"] === this.registrationForm.value["confirmPassword"] ) {         
+  updateUser() {
+    if (this.registrationForm.value["password"] === this.registrationForm.value["confirmPassword"]) {
       this.myservice.update(this.userData.id, this.userData)
-      .subscribe(
-        response => {
-          this.viewData();
-          console.log(response);
-          alert("Updated Successfully");
-          this.showUser = true;  
-        },
-        error => {
-          console.log(error);
-        });
-   } else {     
-      alert(" Password Not Matched");      
-     }    
+        .subscribe(
+          response => {
+            this.viewData();
+            console.log(response);
+            alert("Updated Successfully");
+            this.showUser = true;
+          },
+          error => {
+            console.log(error);
+          });
+    } else {
+      alert(" Password Not Matched");
+    }
   }
 
   editUser(id: any) {
     console.log(id);
-    this.showUser = true;  
+    this.showUser = true;
     this.myservice.get(id)
       .subscribe(
         data => {
@@ -74,21 +76,21 @@ export class ViewComponent implements OnInit {
   }
 
   viewData() {
-      this.myservice.getAll().subscribe(
-        data => {
-          this.userValue = data;
-          console.log(data);
+    this.myservice.getAll().subscribe(
+      data => {
+        this.userValue = data;
+        console.log(data);
 
-          this.userValue.forEach(element => {
-          });
-
-        },
-        error => {
-          console.log(error);
+        this.userValue.forEach(element => {
         });
+
+      },
+      error => {
+        console.log(error);
+      });
   }
 
-  deleteUser(id: any ) {
+  deleteUser(id: any) {
     this.myservice.delete(id)
       .subscribe(
         response => {
@@ -99,5 +101,5 @@ export class ViewComponent implements OnInit {
         error => {
           console.log(error);
         });
-  }  
+  }
 }
